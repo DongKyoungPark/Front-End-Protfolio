@@ -35,28 +35,23 @@ const styles = theme => ({
   }
 });
 
-const users = [
-  {
-    id: 1,
-    name: "박동경",
-    dsc: "안녕하세요!",
-    date: "2020-02-24"
-  },
-  {
-    id: 2,
-    name: "서동화",
-    dsc: "안녕하세요!",
-    date: "2020-02-24"
-  },
-  {
-    id: 3,
-    name: "홍길동",
-    dsc: "안녕하세요!",
-    date: "2020-02-24"
-  }
-];
-
 class App extends Component {
+  state = {
+    users: ""
+  };
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ users: res }))
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch("/api/users");
+    const body = await response.json();
+    return body;
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -81,17 +76,19 @@ class App extends Component {
                 </TableHead>
 
                 <TableBody>
-                  {users.map(data => {
-                    return (                        
-                      <ContactText
-                        key={data.id}
-                        id={data.id}
-                        name={data.name}
-                        dsc={data.dsc}
-                        date={data.date}
-                      />
-                    );
-                  })}
+                  {this.state.users
+                    ? this.state.users.map(data => {
+                        return (
+                          <ContactText
+                            key={data.id}
+                            id={data.id}
+                            name={data.name}
+                            dsc={data.dsc}
+                            date={data.date}
+                          />
+                        );
+                      })
+                    : ""}
                 </TableBody>
               </Table>
             </TableContainer>

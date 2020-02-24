@@ -2,14 +2,15 @@
     "name": "front-end-portfolio",
     "version": "1.0.0",
     "scripts": {
-        "client": "cd client && npm start",
+        "client": "cd client && yarn start",
         "server": "nodemon server.js",
-        "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
+        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
     },
     "dependencies": {
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
-        "nodemon": "^2.0.2"
+        "nodemon": "^2.0.2",
+        "yarn": "^1.22.0"
     },
     "devDependencies": {
         "concurrently": "^4.0.1"

@@ -26,9 +26,7 @@ export class ContactText extends Component {
     return (
       <>
         <StyledTableRow>
-          <StyledTableCell component="th" scope="row" align="center">
-            {this.props.id}
-          </StyledTableCell>
+          <StyledTableCell component="th" scope="row" align="center">{this.props.id}</StyledTableCell>
           <StyledTableCell align="center">{this.props.name}</StyledTableCell>
           <StyledTableCell align="center">{this.props.dsc}</StyledTableCell>
           <StyledTableCell align="center">{this.props.date}</StyledTableCell>
