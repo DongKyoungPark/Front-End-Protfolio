@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PortfolioPic from '../images/pf_02.png';
 
 export class Portfolio extends Component {
   render() {
@@ -13,7 +14,7 @@ export class Portfolio extends Component {
           <div className="portfolio-list clearfix">
             <img
               className="portfolio-img"
-              src="../images/pf_02.png"
+              src={PortfolioPic}
               alt="포트폴리오"
             />
             <div className="portfolio-info">

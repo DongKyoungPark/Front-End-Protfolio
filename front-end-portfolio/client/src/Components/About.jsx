@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Mypic from '../images/PDK.png';
 
 export class About extends Component {
   render() {
@@ -16,7 +17,7 @@ export class About extends Component {
                 <h3 className="sub-title">Profile</h3>
                 <img
                   className="profile-img"
-                  src="../images/PDK.png"
+                  src={Mypic}
                   alt="증명사진"
                 />
                 <ul className="personal-info">

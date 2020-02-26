@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+import MainPic from '../images/bg_main.jpg';
 // const $ = window.jQuery;
 
 $(function ($) {
@@ -72,7 +72,7 @@ $(function ($) {
 
         let alhpa = $(window).scrollTop() / 500;
         $('#home').css({
-            'background-image': 'linear-gradient(to bottom, rgba(255,255,255,' + alhpa + '), rgba(255,255,255,' + alhpa + '), url(../images/bg_main.jpg)',
+            'background-image': 'linear-gradient(to bottom, rgba(255,255,255,' + alhpa + '), rgba(255,255,255,' + alhpa + '), url('+{MainPic}+')',
             'max-width': '100%'
         });
         if (moving) return false;

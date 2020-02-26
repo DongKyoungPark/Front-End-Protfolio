@@ -14,6 +14,16 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import axios from "axios";
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#e0e0e0"
+    }
+  }
+}))(TableRow);
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -32,18 +42,28 @@ const styles = theme => ({
 
   table: {
     minWidth: 1080
+  },
+  progress: {
+    margin: theme.spacing(2),
+    color: theme.palette.common.black
   }
 });
 
 class App extends Component {
   state = {
-    users: ""
+    users: "",
+    completed: 0
   };
 
   componentDidMount() {
+    this.timer = setInterval(this.progress, 20);
     this.callApi()
       .then(res => this.setState({ users: res }))
       .catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   callApi = async () => {
@@ -52,56 +72,73 @@ class App extends Component {
     return body;
   };
 
+  progress = () => {
+    const { completed } = this.state;
+    this.setState({ completed: completed >= 100 ? 0 : completed + 1 });
+  };
+
   render() {
     const { classes } = this.props;
+    const { completed } = this.state;
+
     return (
       <>
-        <div className="wrap">
-          <Nav />
-          <div id="container">
-            <Main />
-            <About />
-            <Portpolio />
-            <Contact />
+        <Nav />
+        <div id="container">
+          <Main />
+          <About />
+          <Portpolio />
+          <Contact />
 
-            <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell align="center">번호</StyledTableCell>
-                    <StyledTableCell align="center">이름</StyledTableCell>
-                    <StyledTableCell align="center">내용</StyledTableCell>
-                    <StyledTableCell align="center">날짜</StyledTableCell>
-                  </TableRow>
-                </TableHead>
+          <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="customized table">
+              <TableHead>
+                <StyledTableRow>
+                  <StyledTableCell align="center">번호</StyledTableCell>
+                  <StyledTableCell align="center">이름</StyledTableCell>
+                  <StyledTableCell align="center">내용</StyledTableCell>
+                  <StyledTableCell align="center">날짜</StyledTableCell>
+                </StyledTableRow>
+              </TableHead>
 
-                <TableBody>
-                  {this.state.users
-                    ? this.state.users.map(data => {
-                        return (
-                          <ContactText
-                            key={data.id}
-                            id={data.id}
-                            name={data.name}
-                            dsc={data.dsc}
-                            date={data.date}
-                          />
-                        );
-                      })
-                    : ""}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </div>
+              <TableBody>
+                {this.state.users ? (
+                  this.state.users.map(data => {
+                    return (
+                      <ContactText
+                        key={data.id}
+                        id={data.id}
+                        name={data.name}
+                        dsc={data.dsc}
+                        date={data.date}
+                      />
+                    );
+                  })
+                ) : (
+                  <StyledTableRow>
+                    <StyledTableCell colSpan="4" align="center">
+                      <CircularProgress
+                        className={classes.progress}
+                        variant="determinate"
+                        value={completed}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
 
+        <div>
+        <Footer />
+        </div>
+        
         <div className="top-btn-wrap">
           <a href="#" className="top-btn hidden-2">
             위로
           </a>
         </div>
-
-        <Footer />
       </>
     );
   }

@@ -2,7 +2,12 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 /* Common */
-.inner-container {
+#root{
+    position: relative;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.inner-container {    
     position: relative;
     top: -5px;
     margin: 0 auto;
@@ -69,11 +74,6 @@ section.first {
 }
 
 /* Layout */
-#wrap {
-    position: relative;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
 #header {
     position: fixed;
     top: 0;
@@ -86,7 +86,7 @@ section.first {
     z-index: 20;
 }
 
-#footer {
+footer {
     z-index: 10;
 }
 
@@ -494,7 +494,7 @@ section.first {
 }
 
 /* Footer */
-#footer{
+footer{
     background-color: #000000; 
     color: white;
 }
@@ -519,7 +519,7 @@ section.first {
 /* Media Query */
 @media screen and (max-width:1200px){
     /* Full Size */
-    #wrap{
+    #root{
         font-size: 1em;
     }
 }
@@ -527,14 +527,14 @@ section.first {
 @media screen and (max-width: 1200px) {
 
     /*PC Size*/
-    #wrap {
+    #root {
       font-size: 1em;
     }
   }
 
 @media screen and (max-width: 1024px){
     /* NoteBook Size */
-    #wrap{
+    #root{
         font-size: 0.9em;
     }
 
@@ -545,7 +545,7 @@ section.first {
 
 @media screen and (max-width: 768px){
     /* Table Size */
-    #wrap{
+    #root{
         font-size: 0.8em;
     }
     
@@ -560,6 +560,7 @@ section.first {
 
     .gnb-wrap{        
         float: none;
+        top: 10px;
         text-align: center;
     }
 
@@ -645,7 +646,7 @@ section.first {
 
 @media screen and (max-width:480px){
     /* Mobile Size */
-    #wrap{
+    #root{
         font-size: 0.9em;
     }
 
@@ -655,6 +656,7 @@ section.first {
 
     .m-gnb{
         display: block;
+        top: 30px;
     }
 
     .gnb-wrap{
@@ -715,7 +717,7 @@ section.first {
 
 @media screen and (max-width:320px){
     /* Minimum Size */
-    #wrap{
+    #root{
         font-size: 0.6em;
     }
 }

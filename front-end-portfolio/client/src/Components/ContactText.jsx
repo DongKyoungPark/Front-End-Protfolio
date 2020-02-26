@@ -3,6 +3,14 @@ import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "#e0e0e0"
+    }
+  }
+}))(TableRow);
+
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -13,26 +21,23 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: "#e0e0e0"
-    }
-  }
-}))(TableRow);
 
 export class ContactText extends Component {
+  
   render() {
+
+    const {id, name, dsc, date} = this.props;
+    
     return (
       <>
         <StyledTableRow>
-          <StyledTableCell component="th" scope="row" align="center">{this.props.id}</StyledTableCell>
-          <StyledTableCell align="center">{this.props.name}</StyledTableCell>
-          <StyledTableCell align="center">{this.props.dsc}</StyledTableCell>
-          <StyledTableCell align="center">{this.props.date}</StyledTableCell>
+          <StyledTableCell align="center">{id}</StyledTableCell>
+          <StyledTableCell align="center">{name}</StyledTableCell>
+          <StyledTableCell align="center">{dsc}</StyledTableCell>
+          <StyledTableCell align="center">{date}</StyledTableCell>
         </StyledTableRow>
       </>
-    );
+    )
   }
 }
 

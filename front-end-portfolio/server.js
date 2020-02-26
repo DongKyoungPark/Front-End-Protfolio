@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -8,28 +9,26 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+const data = fs.readFileSync('./database.json');
+const conf = JSON.parse(data);
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+   host: conf.host,
+   user: conf.user,
+   password: conf.password,
+   port: conf.port,
+   database: conf.database 
+});
+
+connection.connect();
+
 app.get('/api/users', (req, res) => {
-    res.send(
-        [
-            {
-                id: 1,
-                name: "박동경",
-                dsc: "안녕하세요!",
-                date: "2020-02-24"
-            },
-            {
-                id: 2,
-                name: "서동화",
-                dsc: "안녕하세요!",
-                date: "2020-02-24"
-            },
-            {
-                id: 3,
-                name: "홍길동",
-                dsc: "안녕하세요!",
-                date: "2020-02-24"
-            }
-        ]
+    connection.query(
+        "SELECT * FROM USERS",
+        (err, rows, fields)=>{
+            res.send(rows);
+        }
     );
 });
 
