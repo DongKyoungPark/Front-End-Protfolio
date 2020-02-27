@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 
 export class Main extends Component {
   render() {
@@ -24,4 +24,4 @@ export class Main extends Component {
   }
 }
 
-export default Main;
+export default memo(Main);

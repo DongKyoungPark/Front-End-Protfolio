@@ -63,6 +63,7 @@ $(function ($) {
             $('.bar-move').eq(2).addClass('bar_03');
             $('.bar-move').eq(3).addClass('bar_04');
             $('.bar-move').eq(4).addClass('bar_05');
+            $('.bar-move').eq(5).addClass('bar_06');
             $('#header').addClass('active');
             if ($('.scrolltop').is(':hidden')) $('.scrolltop').stop().fadeIn(speed);
         } else {

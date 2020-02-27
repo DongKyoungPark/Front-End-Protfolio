@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 
 export class Nav extends Component {
   render() {
@@ -41,4 +41,4 @@ export class Nav extends Component {
   }
 }
 
-export default Nav;
+export default memo(Nav);

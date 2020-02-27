@@ -372,7 +372,7 @@ footer {
     left: 0;
     width: 0;
     height: 3px;
-    background-color: #00cbfe;
+    background-color: #ff7d7d;
 }
 
 .skill .skill-bar .bar-move.bar_01 {
@@ -386,17 +386,22 @@ footer {
 }
 
 .skill .skill-bar .bar-move.bar_03 {
-    width: 70%;
+    width: 80%;
     transition: 1s;
 }
 
 .skill .skill-bar .bar-move.bar_04 {
-    width: 50%;
+    width: 70%;
     transition: 1s;
 }
 
 .skill .skill-bar .bar-move.bar_05 {
-    width: 50%;
+    width: 60%;
+    transition: 1s;
+}
+
+.skill .skill-bar .bar-move.bar_06 {
+    width: 60%;
     transition: 1s;
 }
 
@@ -502,6 +507,46 @@ footer{
 .col-sm-3{
     text-align: center;
     margin-top: 30px;
+}
+
+/*ContactText, userAdd, userDelete*/
+.form-user-add #form-user-add-btn{
+    height: 50px;
+    width: 1000px;
+    font-size: 20px;
+    background-color: black;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.form-user-add #form-user-add-btn:hover{
+    background-color: gray;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#form-user-add-btn{
+    background-color: black;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#form-user-add-btn:hover{
+    background-color: gray;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.form-user-delete{
+    display: block;
+    text-align: center;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#form-user-delete-btn{
+    background-color: black;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#form-user-delete-btn:hover{
+    background-color: gray;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* Animation */

@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import Nav from "./Components/Nav";
 import Main from "./Components/Main";
 import About from "./Components/About";
 import Portpolio from "./Components/Portfolio";
 import Contact from "./Components/Contact";
 import ContactText from "./Components/ContactText";
+import UserAdd from "./Components/UserAdd";
 import Footer from "./Components/Footer";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -16,6 +17,37 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    fontFamily: '"Noto Sans KR", sans-serif'
+  },
+  progress: {
+    margin: theme.spacing(2),
+    color: theme.palette.common.black
+  },
+  tableHead: {
+    flexGrow: 1,
+    fontSize: 16,
+    fontFamily: '"Noto Sans KR", sans-serif'
+  },
+  menu: {
+    flexGrow: 1,
+    display: "flex",
+    justifyContent: "center",
+    padding: 20,
+    fontFamily: '"Noto Sans KR", sans-serif'
+  },
+  paper: {
+    flexGrow: 1,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15,
+    fontFamily: '"Noto Sans KR", sans-serif'
+  }
+});
 
 const StyledTableRow = withStyles(theme => ({
   root: {
@@ -29,37 +61,35 @@ const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: '"Noto Sans KR", sans-serif'
   }
 }))(TableCell);
 
-const styles = theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
-
-  table: {
-    minWidth: 1080
-  },
-  progress: {
-    margin: theme.spacing(2),
-    color: theme.palette.common.black
-  }
-});
-
 class App extends Component {
-  state = {
-    users: "",
-    completed: 0
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: "",
+      completed: 0
+    };
+  }
+
+  stateRefresh = () => {
+    this.setState({
+      users: "",
+      completed: 0
+    });
+    this.callApi();
+    // .then(res => this.setState({ users: res }))
+    // .catch(err => console.log(err));
   };
 
   componentDidMount() {
     this.timer = setInterval(this.progress, 20);
-    this.callApi()
-      .then(res => this.setState({ users: res }))
-      .catch(err => console.log(err));
+    this.callApi();
+    // .then(res => this.setState({ users: res }))
+    // .catch(err => console.log(err));
   }
 
   componentWillUnmount() {
@@ -67,9 +97,20 @@ class App extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch("/api/users");
-    const body = await response.json();
-    return body;
+    try {
+      const response = await axios.get("/users");
+      console.log(response);
+      this.setState({
+        users: response.data
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    // const response = await fetch("http://localhost:3000/users");
+    // console.log(response);
+    // const body = await response.json();
+    // console.log(body);
+    // return body;
   };
 
   progress = () => {
@@ -90,58 +131,68 @@ class App extends Component {
           <Portpolio />
           <Contact />
 
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <StyledTableRow>
-                  <StyledTableCell align="center">번호</StyledTableCell>
-                  <StyledTableCell align="center">이름</StyledTableCell>
-                  <StyledTableCell align="center">내용</StyledTableCell>
-                  <StyledTableCell align="center">날짜</StyledTableCell>
-                </StyledTableRow>
-              </TableHead>
+          <div className={classes.menu}>
+            <UserAdd stateRefresh={this.stateRefresh} />
+          </div>
 
-              <TableBody>
-                {this.state.users ? (
-                  this.state.users.map(data => {
-                    return (
-                      <ContactText
-                        key={data.id}
-                        id={data.id}
-                        name={data.name}
-                        dsc={data.dsc}
-                        date={data.date}
-                      />
-                    );
-                  })
-                ) : (
-                  <StyledTableRow>
-                    <StyledTableCell colSpan="4" align="center">
-                      <CircularProgress
-                        className={classes.progress}
-                        variant="determinate"
-                        value={completed}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+          <div className={classes.root}>
+            <Paper className={classes.paper}>
+              <TableContainer className={classes.table}>
+                <Table>
+                  <TableHead>
+                    <StyledTableRow>
+                      <StyledTableCell align="center">번호</StyledTableCell>
+                      <StyledTableCell align="center">이름</StyledTableCell>
+                      <StyledTableCell align="center">내용</StyledTableCell>
+                      <StyledTableCell align="center">날짜</StyledTableCell>
+                      <StyledTableCell align="center">설정</StyledTableCell>
+                    </StyledTableRow>
+                  </TableHead>
 
-        <div>
-        <Footer />
-        </div>
-        
-        <div className="top-btn-wrap">
-          <a href="#" className="top-btn hidden-2">
-            위로
-          </a>
+                  <TableBody>
+                    {this.state.users ? (
+                      this.state.users.map(data => {
+                        return (
+                          <ContactText
+                            stateRefresh={this.stateRefresh}
+                            key={data.id}
+                            id={data.id}
+                            name={data.name}
+                            dsc={data.dsc}
+                            date={data.date}
+                          />
+                        );
+                      })
+                    ) : (
+                      <StyledTableRow>
+                        <StyledTableCell colSpan="5" align="center">
+                          <CircularProgress
+                            className={classes.progress}
+                            variant="determinate"
+                            value={completed}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          </div>
+
+          <div>
+            <Footer />
+          </div>
+
+          <div className="top-btn-wrap">
+            <a href="#" className="top-btn hidden-2">
+              위로
+            </a>
+          </div>
         </div>
       </>
     );
   }
 }
 
-export default withStyles(styles)(App);
+export default memo(withStyles(styles)(App));

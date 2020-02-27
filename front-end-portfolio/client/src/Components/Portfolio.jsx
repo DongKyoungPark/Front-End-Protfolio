@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import PortfolioPic from '../images/pf_02.png';
 
 export class Portfolio extends Component {
@@ -41,4 +41,4 @@ export class Portfolio extends Component {
   }
 }
 
-export default Portfolio;
+export default memo(Portfolio);

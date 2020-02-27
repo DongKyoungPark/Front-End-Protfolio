@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import Mypic from '../images/PDK.png';
 
 export class About extends Component {
@@ -109,6 +109,13 @@ export class About extends Component {
                     <div className="bar-move"></div>
                   </div>
                 </li>
+                <li>
+                  <span>Node.js</span>
+                  <div className="bar-wrap">
+                    <div className="bar-basic"></div>
+                    <div className="bar-move"></div>
+                  </div>
+                </li>
               </ul>
             </div>
           </div>
@@ -119,4 +126,4 @@ export class About extends Component {
   }
 }
 
-export default About;
+export default memo(About);
