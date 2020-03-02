@@ -7,19 +7,20 @@ import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import SaveIcon from '@material-ui/icons/Save';
+import SaveIcon from "@material-ui/icons/Save";
 import { Typography } from "@material-ui/core";
+import axios from "axios";
 
 const styles = theme => ({
-  dialog:{
-    width: '100%',
-    textAlign:'center',
+  dialog: {
+    width: "100%",
+    textAlign: "center",
     justifyContent: "center"
   },
-   button:{
-    justifyContent: "center",
+  button: {
+    justifyContent: "center"
   },
-  fontsize:{
+  fontsize: {
     fontSize: "3em"
   }
 });
@@ -36,37 +37,55 @@ class UserAdd extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    this.addUser().then(response => {
-      console.log(response.data);
+    this.addUser();
+
+    setTimeout(function() {
       this.props.stateRefresh();
-    });
+    }.bind(this), 200);
+
     this.setState({
       name: "",
       dsc: "",
-      open:false
+      open: false
     });
+  };
+
+  addUser = () => {
+    axios({
+      method: "POST",
+      url: "/api/users",
+      data: {
+        name: this.state.name,
+        dsc: this.state.dsc
+      }
+    })
+      .then(function(response) {
+        console.log(response.data);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    // this.props.stateRefresh();
+    //window.location.reload();
+    // const url = "/api/users";
+    // const formData = new FormData();
+    // formData.append("name", this.state.name);
+    // formData.append("dsc", this.state.dsc);
+
+    // const config = {
+    //   headers: { "Content-type": "application/x-www-form-urlencoded" }
+    // };
+
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0] + "," + pair[1]);
+    // }
+    // return post(url, formData, config);
   };
 
   handleValueChange = e => {
     let nextState = {};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
-  };
-
-  addUser = () => {
-    const url = "/users";
-    const formData = new FormData();
-    formData.append("name", this.state.name);
-    formData.append("dsc", this.state.dsc);
-
-    console.log(this.state.name);
-    console.log(this.state.dsc);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data"
-      }
-    };
-    return post(url, formData, config);
   };
 
   handleClickOpen = () => {
@@ -98,11 +117,23 @@ class UserAdd extends Component {
           >
             댓글 등록하기
           </Button>
-          
-          <Dialog className={classes.dialog} fullWidth id="dialog" open={this.state.open} onClose={this.handleClose}>
-            <DialogTitle><Typography className={classes.fontsize}> [ 댓글 등록 ] </Typography></DialogTitle>
-            <DialogContent >
-              <TextField className={classes.dialog}
+
+          <Dialog
+            className={classes.dialog}
+            fullWidth
+            id="dialog"
+            open={this.state.open}
+            onClose={this.handleClose}
+          >
+            <DialogTitle>
+              <Typography className={classes.fontsize}>
+                {" "}
+                [ 댓글 등록 ]{" "}
+              </Typography>
+            </DialogTitle>
+            <DialogContent>
+              <TextField
+                className={classes.dialog}
                 label="이름"
                 type="text"
                 name="name"
@@ -110,7 +141,8 @@ class UserAdd extends Component {
                 onChange={this.handleValueChange}
               ></TextField>
               <br />
-              <TextField className={classes.dialog}
+              <TextField
+                className={classes.dialog}
                 label="댓글"
                 type="text"
                 name="dsc"
@@ -127,6 +159,7 @@ class UserAdd extends Component {
                 variant="contained"
                 color="primary"
                 size="medium"
+                method="post"
                 startIcon={<SaveIcon />}
                 onClick={this.handleFormSubmit}
               >

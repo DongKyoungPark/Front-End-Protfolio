@@ -34,7 +34,7 @@ export class UserDelete extends Component {
   }
 
   deleteUser(id) {
-    const url = "/users/" + id;
+    const url = "/api/users/" + id;
     fetch(url, {
       method: "DELETE"
     });

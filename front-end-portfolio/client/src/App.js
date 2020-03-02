@@ -16,7 +16,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axios from "axios";
+// import axios from "axios";
 
 const styles = theme => ({
   root: {
@@ -80,16 +80,16 @@ class App extends Component {
       users: "",
       completed: 0
     });
-    this.callApi();
-    // .then(res => this.setState({ users: res }))
-    // .catch(err => console.log(err));
+    this.callApi()
+      .then(res => this.setState({ users: res }))
+      .catch(err => console.log(err));
   };
 
   componentDidMount() {
     this.timer = setInterval(this.progress, 20);
-    this.callApi();
-    // .then(res => this.setState({ users: res }))
-    // .catch(err => console.log(err));
+    this.callApi()
+      .then(res => this.setState({ users: res }))
+      .catch(err => console.log(err));
   }
 
   componentWillUnmount() {
@@ -97,20 +97,19 @@ class App extends Component {
   }
 
   callApi = async () => {
-    try {
-      const response = await axios.get("/users");
-      console.log(response);
-      this.setState({
-        users: response.data
-      });
-    } catch (e) {
-      console.log(e);
-    }
-    // const response = await fetch("http://localhost:3000/users");
-    // console.log(response);
-    // const body = await response.json();
-    // console.log(body);
-    // return body;
+    // try {
+    //   const response = await axios.get("/api/users");
+    //   console.log(response);
+    //   this.setState({
+    //     users: response.data
+    //   });
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    const response = await fetch("/api/users");
+    const body = await response.json();
+    console.log(body);
+    return body;
   };
 
   progress = () => {
@@ -121,7 +120,7 @@ class App extends Component {
   render() {
     const { classes } = this.props;
     const { completed } = this.state;
-
+    
     return (
       <>
         <Nav />
@@ -151,15 +150,15 @@ class App extends Component {
 
                   <TableBody>
                     {this.state.users ? (
-                      this.state.users.map(data => {
+                      this.state.users.map(c => {
                         return (
                           <ContactText
                             stateRefresh={this.stateRefresh}
-                            key={data.id}
-                            id={data.id}
-                            name={data.name}
-                            dsc={data.dsc}
-                            date={data.date}
+                            key={c.id}
+                            id={c.id}
+                            name={c.name}
+                            dsc={c.dsc}
+                            date={c.date}
                           />
                         );
                       })

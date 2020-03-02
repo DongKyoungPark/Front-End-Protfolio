@@ -24,17 +24,19 @@ const StyledTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-export class ContactText extends Component {
-  render() {
-    const { id, name, dsc, date } = this.props;
-
+  export class ContactText extends Component {      
+    render() {
+      const { id, name, dsc, date } = this.props;      
+      let dateFormat = require('dateformat');
+      let dateType = dateFormat(date, 'yyyy-mm-dd HH:MM:ss');
+    
     return (
       <>
         <StyledTableRow>
           <StyledTableCell align="center">{id}</StyledTableCell>
           <StyledTableCell align="center">{name}</StyledTableCell>
           <StyledTableCell align="center">{dsc}</StyledTableCell>
-          <StyledTableCell align="center">{date}</StyledTableCell>
+          <StyledTableCell align="center">{dateType}</StyledTableCell>
           <StyledTableCell align="center">
             <UserDelete
               stateRefresh={this.props.stateRefresh}
