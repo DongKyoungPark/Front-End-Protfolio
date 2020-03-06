@@ -29,23 +29,17 @@ const styles = theme => ({
     color: theme.palette.common.black
   },
   tableHead: {
-    flexGrow: 1,
     fontSize: 16,
-    fontFamily: '"Noto Sans KR", sans-serif'
   },
   menu: {
-    flexGrow: 1,
     display: "flex",
     justifyContent: "center",
     padding: 20,
-    fontFamily: '"Noto Sans KR", sans-serif'
   },
   paper: {
-    flexGrow: 1,
     marginLeft: 15,
     marginRight: 15,
     marginBottom: 15,
-    fontFamily: '"Noto Sans KR", sans-serif'
   }
 });
 
@@ -62,7 +56,7 @@ const StyledTableCell = withStyles(theme => ({
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
     fontSize: 16,
-    fontFamily: '"Noto Sans KR", sans-serif'
+    fontFamily: '"Noto Sans KR", sans-serif',
   }
 }))(TableCell);
 
@@ -97,15 +91,6 @@ class App extends Component {
   }
 
   callApi = async () => {
-    // try {
-    //   const response = await axios.get("/api/users");
-    //   console.log(response);
-    //   this.setState({
-    //     users: response.data
-    //   });
-    // } catch (e) {
-    //   console.log(e);
-    // }
     const response = await fetch("/api/users");
     const body = await response.json();
     console.log(body);
@@ -140,11 +125,11 @@ class App extends Component {
                 <Table>
                   <TableHead>
                     <StyledTableRow>
-                      <StyledTableCell align="center">번호</StyledTableCell>
-                      <StyledTableCell align="center">이름</StyledTableCell>
-                      <StyledTableCell align="center">내용</StyledTableCell>
-                      <StyledTableCell align="center">날짜</StyledTableCell>
-                      <StyledTableCell align="center">설정</StyledTableCell>
+                      <StyledTableCell align="center" >번호</StyledTableCell>
+                      <StyledTableCell align="center" >이름</StyledTableCell>
+                      <StyledTableCell align="center" >내용</StyledTableCell>
+                      <StyledTableCell align="center" >작성 날짜</StyledTableCell>
+                      <StyledTableCell align="center" >설정</StyledTableCell>
                     </StyledTableRow>
                   </TableHead>
 

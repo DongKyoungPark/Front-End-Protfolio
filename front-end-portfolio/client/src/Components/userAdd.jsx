@@ -1,5 +1,4 @@
 import React, { Component, memo } from "react";
-import { post } from "axios";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -37,11 +36,17 @@ class UserAdd extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
+    if (!this.props.name || !this.props.dsc) {
+      return;
+    }
     this.addUser();
 
-    setTimeout(function() {
-      this.props.stateRefresh();
-    }.bind(this), 200);
+    setTimeout(
+      function() {
+        this.props.stateRefresh();
+      }.bind(this),
+      200
+    );
 
     this.setState({
       name: "",
@@ -65,21 +70,6 @@ class UserAdd extends Component {
       .catch(function(err) {
         console.log(err);
       });
-    // this.props.stateRefresh();
-    //window.location.reload();
-    // const url = "/api/users";
-    // const formData = new FormData();
-    // formData.append("name", this.state.name);
-    // formData.append("dsc", this.state.dsc);
-
-    // const config = {
-    //   headers: { "Content-type": "application/x-www-form-urlencoded" }
-    // };
-
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + "," + pair[1]);
-    // }
-    // return post(url, formData, config);
   };
 
   handleValueChange = e => {

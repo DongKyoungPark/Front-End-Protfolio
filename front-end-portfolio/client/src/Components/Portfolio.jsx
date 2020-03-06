@@ -26,8 +26,9 @@ export class Portfolio extends Component {
               <ul className="portfolio-list">
                 <li>2020.01 - 2020.02</li>
                 <li>웹 표준, 웹 접근성, 반응형 웹</li>
-                <li>HTML/CSS/JS/jQuery</li>
-                <li>기획/디자인/개발 참여도 100%</li>
+                <li>HTML/CSS/JS/jQuery/Bootstrap</li>
+                <li>React/Node.js/Mysql/Firebase</li>
+                <li>기획/디자인/개발</li>
               </ul>
               <a className="btn-view" href="#" target="_blank">
                 View

@@ -24,15 +24,9 @@ export class Footer extends Component {
                   <h5>SNS</h5>
                   <div className="list-group">
                     <a href="#" className="list-group-item">
-                      FaceBook
-                    </a>
-                    <a href="#" className="list-group-item">
-                      YouTube
-                    </a>
-                    <a href="#" className="list-group-item">
                       KaKaoTalk
                     </a>
-                    <a href="#" className="list-group-item">
+                    <a href="https://github.com/DongKyoungPark" className="list-group-item">
                       GitHub
                     </a>
                   </div>

@@ -14,13 +14,9 @@ const StyledTableRow = withStyles(theme => ({
 }))(TableRow);
 
 const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-    fontFamily: '"Noto Sans KR", sans-serif'
-  },
-  body: {
-    fontSize: 14
+  root:{
+    fontSize: 14,
+    fontFamily: '"Noto Sans KR", sans-serif',
   }
 }))(TableCell);
 
@@ -33,11 +29,11 @@ const StyledTableCell = withStyles(theme => ({
     return (
       <>
         <StyledTableRow>
-          <StyledTableCell align="center">{id}</StyledTableCell>
-          <StyledTableCell align="center">{name}</StyledTableCell>
-          <StyledTableCell align="center">{dsc}</StyledTableCell>
-          <StyledTableCell align="center">{dateType}</StyledTableCell>
-          <StyledTableCell align="center">
+          <StyledTableCell id="table" align="center">{id}</StyledTableCell>
+          <StyledTableCell id="table" align="center">{name}</StyledTableCell>
+          <StyledTableCell id="table" align="center">{dsc}</StyledTableCell>
+          <StyledTableCell id="table" align="center">{dateType}</StyledTableCell>
+          <StyledTableCell id="table" align="center">
             <UserDelete
               stateRefresh={this.props.stateRefresh}
               id={this.props.id}
