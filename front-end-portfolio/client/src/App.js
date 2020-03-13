@@ -169,7 +169,7 @@ class App extends Component {
           </div>
 
           <div className="top-btn-wrap">
-            <a href="#" className="top-btn hidden-2">
+            <a href="#home" className="top-btn hidden-2">
               위로
             </a>
           </div>

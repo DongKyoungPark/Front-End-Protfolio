@@ -411,6 +411,10 @@ footer {
     padding-bottom: 140px;
 }
 
+.portfolio-list #todo{
+    text-align: center;
+}
+
 .portfolio-list.last {
     padding-bottom: 0;
 }

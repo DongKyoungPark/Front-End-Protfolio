@@ -29,8 +29,13 @@ export class Portfolio extends Component {
                 <li>HTML/CSS/JS/jQuery/Bootstrap</li>
                 <li>React/Node.js/Mysql/Firebase</li>
                 <li>기획/디자인/개발</li>
+                <br/>
+                <li id="todo"> [ TODO ] </li>
+                <li id="todo">개발 버전 - 댓글 등록 및 삭제 구현 완료</li>
+                <li id="todo">배포 빌드 - 서버 연동 작업 정체중</li>
               </ul>
-              <a className="btn-view" href="#" target="_blank">
+
+              <a className="btn-view" href="#home" target="_blank">
                 View
               </a>
             </div>

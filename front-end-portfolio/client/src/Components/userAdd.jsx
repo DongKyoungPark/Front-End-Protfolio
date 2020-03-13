@@ -36,10 +36,11 @@ class UserAdd extends Component {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    if (!this.props.name || !this.props.dsc) {
+    if (this.state.name === "" || this.state.dsc === "") {
       return;
+    } else {
+      this.addUser();
     }
-    this.addUser();
 
     setTimeout(
       function() {
